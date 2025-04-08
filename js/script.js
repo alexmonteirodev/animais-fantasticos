@@ -29,8 +29,9 @@ const modal = new Modal(
 );
 modal.init();
 
-import tooltip from "./modules/tooltip.js";
-tooltip();
+import Tooltip from "./modules/tooltip.js";
+const tooltip = new Tooltip("[data-tooltip]");
+tooltip.init();
 
 import dropdown from "./modules/dropdown-menu.js";
 dropdown();
