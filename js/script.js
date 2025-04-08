@@ -21,8 +21,13 @@ const tabNav = new TabNav(
 );
 tabNav.init();
 
-import initModal from "./modules/modal.js";
-initModal();
+import Modal from "./modules/modal.js";
+const modal = new Modal(
+  '[data-modal="abrir"]',
+  '[data-modal="fechar"]',
+  '[data-modal="container"]'
+);
+modal.init();
 
 import tooltip from "./modules/tooltip.js";
 tooltip();
