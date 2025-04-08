@@ -1,0 +1,43 @@
+[data-dropdown] {
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  background: #e54;
+  border: 2px solid #333;
+  z-index: 200; /*zindex serve para que esse item sobreponha os outros e não ficque por baixo. Para entender melhor coloque o top em 150px e comente o zindex. porque 200, para sobrepor tudo, se colocasse 1 já funcionaria mas com 200 sobrepoe outros zindex*/
+  top: 38px; /*serve para não deixar nenhum gap entre a caixa do sobre e o dropdown menu, porque caso tenha um gap, como é feito apenas pelo css, quando o mouse sair do sobre e passar pelo gap, o dropdown some, experimente aumentar o top para ver.*/
+}
+.dropdown-menu::before {
+  /*triangulo*/
+  content: "";
+  position: absolute;
+  display: block;
+  top: -10px;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #e54;
+}
+.dropdown-menu li a:hover {
+  color: white;
+}
+[data-dropdown] .dropdown-menu {
+  display: none;
+}
+[data-dropdown]:hover .dropdown-menu, /* a virgula (,) significa: ou então*/
+[data-dropdown].active .dropdown-menu {
+  display: block;
+  animation: show-up 0.3s forwards;
+}
+@keyframes show-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
