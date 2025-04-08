@@ -1,18 +1,25 @@
 // obs: (a ordem de execução importa)
 import ScrollSuave from "./modules/scroll-suave.js";
 const options = {
-    behavior: 'smooth',
-    block: 'start'
+  behavior: "smooth",
+  block: "start",
 };
-const scrollSuave = new ScrollSuave('[data-menu="suave"] a[href^="#"]', options);
+const scrollSuave = new ScrollSuave(
+  '[data-menu="suave"] a[href^="#"]',
+  options
+);
 scrollSuave.init();
 
 import Accordion from "./modules/accordion.js";
 const accordion = new Accordion('[data-anime="accordion"] dt');
 accordion.init();
 
-import initTabNav from "./modules/tabnav.js";
-initTabNav();
+import TabNav from "./modules/tabnav.js";
+const tabNav = new TabNav(
+  '[data-tab="menu"] li',
+  '[data-tab="content"] section'
+);
+tabNav.init();
 
 import initModal from "./modules/modal.js";
 initModal();
