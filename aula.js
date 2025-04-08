@@ -77,3 +77,7 @@
 //   }
 
 //essa aula é a de refatorar tabnav - 1104;
+
+// bind do objeto da classe dos callbacks (sempre que tiver callback tem que fazer bind). lembrando que o bind atribui um novo valor ao this.
+
+// Relatora é: reescrever o mesmo codigo de outra forma, se for editar o codigo ai já não é refatorar.
