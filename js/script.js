@@ -1,6 +1,11 @@
 // obs: (a ordem de execução importa)
-import scrollSuave from "./modules/scroll-suave.js";
-scrollSuave();
+import ScrollSuave from "./modules/scroll-suave.js";
+const options = {
+    behavior: 'smooth',
+    block: 'start'
+};
+const scrollSuave = new ScrollSuave('[data-menu="suave"] a[href^="#"]', options);
+scrollSuave.init();
 
 import initAnimacaoScroll from "./modules/scroll-animacao.js";
 initAnimacaoScroll();
