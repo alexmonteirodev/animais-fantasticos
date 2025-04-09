@@ -48,5 +48,6 @@ fetchAnimais("../../animaisapi.json", ".numeros-grid");
 import fetchBitcoin from "./modules/fetch-bitcoin.js";
 fetchBitcoin("https://blockchain.info/ticker", ".btc-preco");
 
-import initAnimacaoScroll from "./modules/scroll-animacao.js";
-initAnimacaoScroll();
+import ScrollAnima from "./modules/scroll-anima.js";
+const scrollAnima = new ScrollAnima('[data-anime="scroll"]');
+scrollAnima.init();
