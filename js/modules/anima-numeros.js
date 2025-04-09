@@ -1,41 +1,57 @@
-export default function initAnimaNumeros(params) {
-  function animaNumeros(params) {
-    const numeros = document.querySelectorAll("[data-numero]");
+export default class AnimaNumeros {
+  constructor(numeros, observerTarget, observerClass) {
+    this.numeros = document.querySelectorAll(numeros);
+    this.observerTarget = document.querySelector(observerTarget);
+    this.observerClass = observerClass;
 
-    numeros.forEach((params) => {
-      const total = +params.innerText;
-
-      const incremento = Math.floor(total / 100); //floor serve para arredondar os numeros para inteiros
-
-      let start = 0;
-      const timer = setInterval(() => {
-        //repare que a arrow, fura o escopo e busca o params do forEach
-        start += incremento; //start = start + incremento
-        params.innerText = start; //para mostrar na pagina e não no console
-        if (start > total) {
-          params.innerText = total; //pq no  if (start > total) pelo incremento o numero passa então, isso serve para ele voltar ao numero correto
-          clearInterval(timer);
-        }
-      }, 25 * Math.random()); //serve para cada numero terminar um pouco antes de forma randomica (fica mais organico e não parece uma maquina)
-    });
+    // bind o this do objeto ao callback da mutação
+    this.handleMutation = this.handleMutation.bind(this);
   }
-  // a animação dos numeros não espera o scroll da pagina e para recolver isso: quando a seção mudar o atributo, para ocorrer algo, vou add um observador de mutações porque quando isso ocorrer ele dispara a animação dos numeros:
 
-  const observerTarget = document.querySelector(".numeros");
+  // Recebe um elemento do dom, com número em seu texto
+  // incrementa a partir de 0 até o número final
+  //static pois não precisa do objeto pra funcionar
+  static incrementarNumero(numero) {
+    const total = +numero.innerText;
+    const incremento = Math.floor(total / 100);
+    let start = 0;
+    const timer = setInterval(() => {
+      start += incremento;
+      numero.innerText = start;
+      if (start > total) {
+        numero.innerText = total;
+        clearInterval(timer);
+      }
+    }, 25 * Math.random());
+  }
 
-  const observer = new MutationObserver(handleMutation);
+  // Ativa incrementar número para cada
+  // número selecionado do dom
+  animaNumeros() {
+    this.numeros.forEach((numero) =>
+      this.constructor.incrementarNumero(numero)
+    ); //constructor pois o método incrementar por ser static faz parte de anima numeors e não do objeto. como se fosse usar Array.from
+  }
 
-  observer.observe(observerTarget, { attributes: true });
-
-  function handleMutation(mutation) {
-    //para ativar quando tiver a mutação
-    //console.log('mudou')       //mudança no scrol-animacao.js pq ele remove ativo toda hora
-    //console.log(mutation[0]) // acessando a mutação 0 que é a unica (atributos) - console.log(mutation)
-    //console.log(mutation[0].target.classList.contains('ativo'))
-
-    if (mutation[0].target.classList.contains("ativo")) {
-      observer.disconnect(); //para não resetar toda hora que der scroll
-      animaNumeros();
+  // Função que ocorre quando a mutações ocorrer
+  handleMutation(mutation) {
+    if (mutation[0].target.classList.contains(this.observerClass)) {
+      this.observer.disconnect();
+      this.animaNumeros();
     }
+  }
+
+  // Adiciona o MutationObserver para verificar
+  // quanto a classe ativo é adiciona ao element target
+  addMutationObserver() {
+    this.observer = new MutationObserver(this.handleMutation);
+    this.observer.observe(this.observerTarget, { attributes: true });
+  }
+
+  init() {
+    if (this.numeros.length && this.observerTarget) {
+      this.addMutationObserver();
+    }
+    return this;
   }
 }
