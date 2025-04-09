@@ -1,11 +1,12 @@
 //animação ao scroll (ao scrolar  a pg, os elementos fazem animação para o lodo)
+import debounce from "./debounce.js";
 export default class ScrollAnima {
   constructor(sections) {
     this.sections = document.querySelectorAll(sections);
     this.metadeTela = window.innerHeight * 0.75; //tamanho da tela (eixo y) * 60%
 
     //bind
-    this.checkDistance = this.checkDistance.bind(this);
+    this.checkDistance = debounce(this.checkDistance.bind(this), 100);
   }
 
   //pega a distancia de cada item em relacao ao topo do site
