@@ -42,8 +42,8 @@ initMenuMobile();
 import initFuncionamento from "./modules/horario-funcionamento.js";
 initFuncionamento();
 
-import initFetchAnimais from "./modules/fetch-animais.js";
-initFetchAnimais();
+import fetchAnimais from "./modules/fetch-animais.js";
+fetchAnimais("../../animaisapi.json", ".numeros-grid");
 
 import initFetchBitcoin from "./modules/fetch-bitcoin.js";
 initFetchBitcoin();
