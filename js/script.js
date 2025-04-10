@@ -37,8 +37,9 @@ import DropdownMenu from "./modules/dropdown-menu.js";
 const dropdownMenu = new DropdownMenu("[data-dropdown]");
 dropdownMenu.init();
 
-import initMenuMobile from "./modules/menu-mobile.js";
-initMenuMobile();
+import MenuMobile from "./modules/menu-mobile.js";
+const menuMobile = new MenuMobile('[data-menu="button"]', '[data-menu="list"]');
+menuMobile.init();
 
 import initFuncionamento from "./modules/horario-funcionamento.js";
 initFuncionamento();
