@@ -1,25 +1,49 @@
-export default function initFuncionamento(params) {
-  const funcionamento = document.querySelector("[data-semana]");
-  const diasSemana = funcionamento.dataset.semana.split(",").map(Number);
+export default class Funcionamento {
+  constructor(funcionamento, activeClass) {
+    this.funcionamento = document.querySelector(funcionamento);
+    this.activeClass = activeClass;
+  }
 
-  const funcionamentoHorario = document.querySelector("[data-horario]");
-  const horarioSemaana = funcionamentoHorario.dataset.horario
-    .split(",")
-    .map(Number);
+  dadosFuncionamento() {
+    this.diasSemana = this.funcionamento.dataset.semana.split(",").map(Number);
+    this.horarioSemaana = this.funcionamento.dataset.horario
+      .split(",")
+      .map(Number);
+  }
 
-  const dataAgora = new Date();
-  const diaAgora = dataAgora.getDay();
-  const horarioAgora = dataAgora.getHours();
+  dadosAgora() {
+    this.dataAgora = new Date();
+    this.diaAgora = this.dataAgora.getDay();
+    this.horarioAgora = this.dataAgora.getUTCHours() - 3; //hora do brasil é UTC - 3
+  }
 
-  const semanaAberto = diasSemana.indexOf(diaAgora) !== -1;
+  estaAberto() {
+    const semanaAberto = this.diasSemana.indexOf(this.diaAgora) !== -1;
 
-  const horarioAberto =
-    horarioAgora >= horarioSemaana[0] && horarioAgora < horarioSemaana[1]
-      ? true
-      : false;
-  // console.log(horarioAberto)
+    const horarioAberto =
+      this.horarioAgora >= this.horarioSemaana[0] &&
+      this.horarioAgora < this.horarioSemaana[1]
+        ? true
+        : false;
 
-  if (semanaAberto && horarioAberto) {
-    funcionamento.classList.add("aberto");
+    return semanaAberto && horarioAberto; //retorna true se ambos forem verdadeiros
+  }
+
+  ativaAberto() {
+    if (this.estaAberto()) {
+      this.funcionamento.classList.add(this.activeClass);
+    }
+  }
+
+  init() {
+    if (this.funcionamento) {
+      //funcionamento vem de querySelector e não querySelectorAll, então não precisa de .length
+      this.dadosFuncionamento();
+      this.dadosAgora();
+      this.ativaAberto();
+    }
+    return this;
   }
 }
+
+//const funcionamentoHorario = document.querySelector("[data-horario]");
