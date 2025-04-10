@@ -41,8 +41,9 @@ import MenuMobile from "./modules/menu-mobile.js";
 const menuMobile = new MenuMobile('[data-menu="button"]', '[data-menu="list"]');
 menuMobile.init();
 
-import initFuncionamento from "./modules/horario-funcionamento.js";
-initFuncionamento();
+import Funcionamento from "./modules/horario-funcionamento.js";
+const funcionamento = new Funcionamento("[data-semana]", "aberto");
+funcionamento.init();
 
 import fetchAnimais from "./modules/fetch-animais.js";
 fetchAnimais("../../animaisapi.json", ".numeros-grid");
