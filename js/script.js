@@ -46,7 +46,7 @@ const funcionamento = new Funcionamento("[data-semana]", "aberto");
 funcionamento.init();
 
 import fetchAnimais from "./modules/fetch-animais.js";
-fetchAnimais("../../animaisapi.json", ".numeros-grid");
+fetchAnimais("./animaisapi.json", ".numeros-grid"); // ./ pq ao dar o build o webpack puxa pra pasta main e não ../../
 
 import fetchBitcoin from "./modules/fetch-bitcoin.js";
 fetchBitcoin("https://blockchain.info/ticker", ".btc-preco");
