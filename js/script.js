@@ -54,3 +54,8 @@ fetchBitcoin("https://blockchain.info/ticker", ".btc-preco");
 import ScrollAnima from "./modules/scroll-anima.js";
 const scrollAnima = new ScrollAnima('[data-anime="scroll"]');
 scrollAnima.init();
+
+import SlideNav from "./modules/slide.js";
+const slide = new SlideNav(".slide", ".slide-wrapper");
+slide.init();
+slide.addControl(".custom-controls");
