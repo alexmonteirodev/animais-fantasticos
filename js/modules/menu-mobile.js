@@ -17,6 +17,7 @@ export default class MenuMobile {
   }
 
   openMenu(event) {
+    event.preventDefault(); //para n acionar duplo clique por contas dos dois eventos passados
     this.menuButton.classList.add(this.activeClass);
     this.menuList.classList.add(this.activeClass);
     outsideClick(this.menuList, this.eventos, () => {

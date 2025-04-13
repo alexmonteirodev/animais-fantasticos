@@ -120,7 +120,6 @@ export class Slide {
         element,
       };
     });
-    console.log(this.slideArray);
   }
 
   activePrevSlide() {
@@ -197,7 +196,6 @@ export default class SlideNav extends Slide {
       }</a></li>`;
     });
     this.wrapper.appendChild(control);
-    console.log(control);
     return control;
   }
 
